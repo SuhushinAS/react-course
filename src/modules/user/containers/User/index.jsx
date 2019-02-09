@@ -1,8 +1,9 @@
-import {actions} from 'modules/user/constants/index.js';
+import {loadUser} from 'modules/user/actions/index.js';
+import {actions, userModuleName} from 'modules/user/constants/index.js';
 import Form from 'modules/user/containers/Form/index.jsx';
 import List from 'modules/user/containers/List/index.jsx';
-import withUser from 'modules/user/hoc/withUser/index.jsx';
 import React from 'react';
+import {connect} from 'react-redux';
 
 class User extends React.Component {
   constructor(props) {
@@ -38,4 +39,13 @@ class User extends React.Component {
   }
 }
 
-export default withUser(User);
+export default connect(
+  (state) => ({
+    action: state[userModuleName].action,
+    id: state[userModuleName].id,
+    list: state[userModuleName].list,
+  }),
+  {
+    loadUser,
+  },
+)(User);

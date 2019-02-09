@@ -1,5 +1,7 @@
-import withUser from 'modules/user/hoc/withUser/index.jsx';
+import {closeUser, saveUser} from 'modules/user/actions/index.js';
+import {userModuleName} from 'modules/user/constants/index.js';
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Form extends React.Component {
   constructor(props) {
@@ -8,7 +10,7 @@ class Form extends React.Component {
   }
 
   initSate(props) {
-    return props.data[props.id];
+    return props.user;
   }
 
   onSubmit = (e) => {
@@ -58,4 +60,12 @@ class Form extends React.Component {
   }
 }
 
-export default withUser(Form);
+export default connect(
+  (state, props) => ({
+    user: state[userModuleName].data[props.id],
+  }),
+  {
+    closeUser,
+    saveUser,
+  },
+)(Form);

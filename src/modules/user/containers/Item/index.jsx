@@ -1,13 +1,15 @@
-import withUser from 'modules/user/hoc/withUser/index.jsx';
+import {editUser} from 'modules/user/actions/index.js';
+import {userModuleName} from 'modules/user/constants/index.js';
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Item extends React.Component {
   handleClick = () => {
-    this.props.editUser(this.props.data[this.props.id]);
+    this.props.editUser(this.props.user);
   };
 
   render() {
-    const user = this.props.data[this.props.id];
+    const {user} = this.props;
     const fullName = `${user.firstName} ${user.lastName}`;
 
     return (
@@ -28,4 +30,11 @@ class Item extends React.Component {
   }
 }
 
-export default withUser(Item);
+export default connect(
+  (state, props) => ({
+    user: state[userModuleName].data[props.id],
+  }),
+  {
+    editUser,
+  },
+)(Item);
