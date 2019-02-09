@@ -2,7 +2,7 @@ import Item from 'modules/user/containers/Item/index.jsx';
 import React from 'react';
 
 class List extends React.Component {
-  renderItem = (id) => <Item user={this.props.data[id]} key={id} editUser={this.props.editUser} />;
+  renderItem = (id) => <Item id={id} key={id} />;
 
   render() {
     return (

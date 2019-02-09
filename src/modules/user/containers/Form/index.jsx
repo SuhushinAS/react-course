@@ -1,3 +1,4 @@
+import withUser from 'modules/user/hoc/withUser/index.jsx';
 import React from 'react';
 
 class Form extends React.Component {
@@ -7,7 +8,7 @@ class Form extends React.Component {
   }
 
   initSate(props) {
-    return props.user;
+    return props.data[props.id];
   }
 
   onSubmit = (e) => {
@@ -57,4 +58,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default withUser(Form);

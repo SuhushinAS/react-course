@@ -1,12 +1,13 @@
+import withUser from 'modules/user/hoc/withUser/index.jsx';
 import React from 'react';
 
 class Item extends React.Component {
   handleClick = () => {
-    this.props.editUser(this.props.user);
+    this.props.editUser(this.props.data[this.props.id]);
   };
 
   render() {
-    const {user} = this.props;
+    const user = this.props.data[this.props.id];
     const fullName = `${user.firstName} ${user.lastName}`;
 
     return (
@@ -27,4 +28,4 @@ class Item extends React.Component {
   }
 }
 
-export default Item;
+export default withUser(Item);
