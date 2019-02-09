@@ -1,9 +1,10 @@
 import reducer from 'reducer.js';
-import {compose, createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+import thunk from 'redux-thunk';
 
 export default function configureStore() {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const enhancer = composeEnhancers();
+  const enhancer = composeEnhancers(applyMiddleware(thunk));
   const store = createStore(reducer, enhancer);
 
   if (module.hot) {

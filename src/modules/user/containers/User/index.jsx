@@ -1,25 +1,15 @@
 import {loadUser} from 'modules/user/actions/index.js';
-import {actions, userModuleName} from 'modules/user/constants/index.js';
+import {actions} from 'modules/user/constants/index.js';
 import Form from 'modules/user/containers/Form/index.jsx';
 import List from 'modules/user/containers/List/index.jsx';
+import {userSelectorAction, userSelectorId, userSelectorListSort} from 'modules/user/selectors/index.js';
 import React from 'react';
 import {connect} from 'react-redux';
 
 class User extends React.Component {
   constructor(props) {
     super(props);
-    this.load();
-  }
-
-  async load() {
-    const userList = await this.fetch();
-    this.props.loadUser(userList);
-  }
-
-  async fetch() {
-    const response = await fetch('/api/v1/user');
-    const {data} = await response.json();
-    return data.list;
+    this.props.loadUser();
   }
 
   render() {
@@ -41,9 +31,9 @@ class User extends React.Component {
 
 export default connect(
   (state) => ({
-    action: state[userModuleName].action,
-    id: state[userModuleName].id,
-    list: state[userModuleName].list,
+    action: userSelectorAction(state),
+    id: userSelectorId(state),
+    list: userSelectorListSort(state),
   }),
   {
     loadUser,

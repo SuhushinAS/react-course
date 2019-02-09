@@ -1,5 +1,5 @@
 import {closeUser, saveUser} from 'modules/user/actions/index.js';
-import {userModuleName} from 'modules/user/constants/index.js';
+import {userSelectorItem} from 'modules/user/selectors/index.js';
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -62,7 +62,7 @@ class Form extends React.Component {
 
 export default connect(
   (state, props) => ({
-    user: state[userModuleName].data[props.id],
+    user: userSelectorItem(state, props.id),
   }),
   {
     closeUser,
