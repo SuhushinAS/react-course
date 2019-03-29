@@ -1,7 +1,7 @@
 import Item from 'modules/user/containers/Item/index.jsx';
 import React from 'react';
 
-class List extends React.Component {
+class List extends React.PureComponent {
   renderItem = (id) => <Item id={id} key={id} />;
 
   render() {

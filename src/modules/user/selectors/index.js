@@ -27,20 +27,22 @@ export function userSelectorList(state) {
 
 export const userSelectorListSort = createSelector(
   [userSelectorData, userSelectorList],
-  (data, list) => list.sort((a, b) => {
-    const userA = data[a];
-    const userB = data[b];
-    const fullNameA = `${userA.firstName}${userA.lastName}`;
-    const fullNameB = `${userB.firstName}${userB.lastName}`;
+  (data, list) => {
+    return list.sort((a, b) => {
+      const userA = data[a];
+      const userB = data[b];
+      const fullNameA = `${userA.firstName}${userA.lastName}`;
+      const fullNameB = `${userB.firstName}${userB.lastName}`;
 
-    if (fullNameA < fullNameB) {
-      return -1;
-    }
+      if (fullNameA < fullNameB) {
+        return -1;
+      }
 
-    if (fullNameA > fullNameB) {
-      return 1;
-    }
+      if (fullNameA > fullNameB) {
+        return 1;
+      }
 
-    return 0;
-  })
+      return 0;
+    });
+  }
 );

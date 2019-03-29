@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import configureStore from 'store.js';
 
 const store = configureStore();
+console.log(store);
 
 class App extends Component {
   render() {
